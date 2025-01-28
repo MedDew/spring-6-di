@@ -7,7 +7,7 @@ import org.springframework.test.context.ActiveProfiles;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-@ActiveProfiles("ES")
+//@ActiveProfiles("ES")
 @SpringBootTest
 class myi18NControllerTestES {
     @Autowired
