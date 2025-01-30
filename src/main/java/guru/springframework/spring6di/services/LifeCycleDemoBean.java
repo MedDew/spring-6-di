@@ -1,5 +1,6 @@
 package guru.springframework.spring6di.services;
 
+import guru.springframework.spring6di.controllers.MyController;
 import jakarta.annotation.PostConstruct;
 import jakarta.annotation.PreDestroy;
 import org.springframework.beans.BeansException;
@@ -67,10 +68,10 @@ public class LifeCycleDemoBean implements InitializingBean, DisposableBean, Bean
     public Object postProcessBeforeInitialization(Object bean, String beanName) throws BeansException {
         System.out.println("## postProcessBeforeInitialization "+beanName+" - "+bean.getClass().getName());
 
-        if(bean instanceof LifeCycleDemoBean) {
-            LifeCycleDemoBean lifeCycleDemoBean = (LifeCycleDemoBean) bean;
+        if(bean instanceof MyController) {
+            MyController myController = (MyController) bean;
             System.out.println("Calling before init");
-            lifeCycleDemoBean.beforeInit();
+            myController.beforeInit();
         }
 
         return BeanPostProcessor.super.postProcessBeforeInitialization(bean, beanName);
@@ -80,20 +81,12 @@ public class LifeCycleDemoBean implements InitializingBean, DisposableBean, Bean
     public Object postProcessAfterInitialization(Object bean, String beanName) throws BeansException {
         System.out.println("## postProcessAfterInitialization "+beanName+" - "+bean.getClass().getName());
 
-        if(bean instanceof LifeCycleDemoBean) {
-            LifeCycleDemoBean lifeCycleDemoBean = (LifeCycleDemoBean) bean;
+        if(bean instanceof MyController) {
+            MyController myController = (MyController) bean;
             System.out.println("Calling after init");
-            lifeCycleDemoBean.afterInit();
+            myController.afterInit();
         }
 
         return BeanPostProcessor.super.postProcessAfterInitialization(bean, beanName);
-    }
-
-    public void beforeInit() {
-        System.out.println("## - Before Init - Called by Bean Post Processor");
-    }
-
-    public void afterInit() {
-        System.out.println("## - After Init - Called by Bean Post Processor");
     }
 }
